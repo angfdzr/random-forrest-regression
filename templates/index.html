@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Prediksi Harga Ikan</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f2f2f2;
+      margin: 0;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    /* Form kiri */
+    form {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input,
+    select,
+    button {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Hasil dan gambar kanan */
+    .right-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      min-width: 280px;
+    }
+
+    .result {
+      background-color: #e9f5ff;
+      border: 2px solid #007bff;
+      border-radius: 8px;
+      padding: 20px;
+      width: 100%;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #0056b3;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .kkp-logo {
+      margin-top: 30px;
+      width: 100%;
+      max-width: 280px;
+      text-align: center;
+    }
+
+    .kkp-logo img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Responsive for small screens */
+    @media (max-width: 720px) {
+      .container {
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .right-panel {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .result {
+        flex: 1;
+        margin-right: 20px;
+      }
+
+      .kkp-logo {
+        max-width: 100px;
+        margin-top: 0;
+        display: flex;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Prediksi Harga Rata-Rata Ikan (Rp/kg)</h2>
+
+  <div class="container">
+    <form action="/predict" method="post">
+      <input type="number" name="tahun" placeholder="Tahun" required />
+
+      <select name="kabupaten_kota" required>
+        <option value="" disabled selected>Pilih Kabupaten/Kota</option>
+        <option value="0">Kota Cilegon</option>
+        <option value="1">Kota Serang</option>
+        <option value="2">Lebak</option>
+        <option value="3">Pandeglang</option>
+        <option value="4">Kabupaten Serang</option>
+        <option value="5">Tangerang</option>
+      </select>
+
+      <select name="jenis_ikan" required>
+        <option value="" disabled selected>Pilih Jenis Ikan</option>
+        <option value="ALU-ALU BESAR">Alu-Alu Besar</option>
+        <option value="ALU-ALU SIRIP HITAM">Alu-Alu Sirip Hitam</option>
+        <option value="BANDENG LAKI">Bandeng Laki</option>
+        <option value="BARAKUDA BESAR">Barakuda Besar</option>
+        <option value="BARAKUDA SIRIP HITAM">Barakuda Sirip Hitam</option>
+        <option value="BARONANG">Baronang</option>
+        <option value="BAWAL HITAM">Bawal Hitam</option>
+        <option value="BAWAL PUTIH">Bawal Putih</option>
+        <option value="CENDRO">Cendro</option>
+        <option value="CUMI-CUMI">Cumi-cumi</option>
+        <option value="EKOR KUNING">Ekor Kuning</option>
+        <option value="GABUS LAUT">Gabus Laut</option>
+        <option value="GINDARA">Gindara</option>
+        <option value="GULAMAH">Gulamah</option>
+        <option value="GURITA">Gurita</option>
+        <option value="JENAHA">Jenaha</option>
+        <option value="KAKAP MERAH">Kakap Merah</option>
+        <option value="KAKAP PUTIH">Kakap Putih</option>
+        <option value="KAPAS-KAPAS">Kapas-Kapas</option>
+        <option value="KEMBUNG">Kembung</option>
+        <option value="KERAPU">Kerapu</option>
+        <option value="KERISI">Kerisi</option>
+        <option value="KUWE">Kuwe</option>
+        <option value="LAYANG">Layang</option>
+        <option value="LAYUR">Layur</option>
+        <option value="LEMADANG">Lemadang</option>
+        <option value="LEMURU">Lemuru</option>
+        <option value="LIDAH">Lidah</option>
+        <option value="LOBSTER">Lobster</option>
+        <option value="TENGGIRI">Tenggiri</option>
+        <option value="TONGKOL">Tongkol</option>
+      </select>
+
+      <input type="number" step="0.01" name="volume" placeholder="Volume (ton)" required />
+      <input type="number" step="0.01" name="nilai" placeholder="Nilai (Rp. Juta)" required />
+
+      <button type="submit">Prediksi</button>
+    </form>
+
+    <div class="right-panel">
+      <div class="result">
+        {% if prediction_text %}
+          {{ prediction_text }}
+        {% else %}
+          Hasil prediksi akan muncul di sini
+        {% endif %}
+      </div>
+
+      <div class="kkp-logo">
+        <!-- Ganti src dengan link atau path gambar/logo KKP kamu -->
+        <img src="../static/KKP.jpg" alt="Logo KKP" />
+        <p style="font-size: 12px; color: #555; margin-top: 8px;">Sumber Data: KKP</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
